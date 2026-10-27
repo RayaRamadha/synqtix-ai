@@ -1,0 +1,15 @@
+fastapi>=0.110
+uvicorn>=0.29
+jsonschema>=4.20     # validation / eval harness
+httpx>=0.27          # tests
+pytest>=8
+
+# Multi-agent explain layer (Microsoft Agent Framework + Microsoft Foundry). Without credentials the app still runs on templates.
+agent-framework-core>=1.23,<2
+agent-framework-foundry>=1.15,<2
+agent-framework-openai>=1.17,<2
+azure-identity>=1.19
+
+# optional, for tests/browser_smoke.py
+# playwright
+# pillow

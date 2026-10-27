@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0",
+  "match_id": 900001,
+  "synthetic": true,
+  "insight_id": "h3-90p3-analyst-en-0001",
+  "trigger": {
+    "kind": "goal",
+    "event_ids": [
+      "072312b4-6603-4b7a-867f-4c889a4897e5"
+    ],
+    "event_index": 3734,
+    "rule_id": "goal.milestone.hat_trick"
+  },
+  "timing": {
+    "period": 2,
+    "minute": 93,
+    "second": 16,
+    "display_clock": "90+3'",
+    "stream_offset_s": 5672.51,
+    "show_at_stream_offset_s": 5674.51,
+    "ttl_ms": 9000
+  },
+  "headline": "Valdrin completes hat-trick: 3-2 at 90+3'",
+  "why_it_matters": "Valdrin scored three different ways (open play, penalty, header) to turn a 0-2 deficit into 3-2. Kestrel's second-half xG (2.76) was far above the first half (1.1): sustained pressure finally converted.",
+  "explanation": {
+    "factors": [
+      {
+        "type": "milestone",
+        "statement": "Hat-trick with three different goal types.",
+        "metric_keys": [
+          "valdrin_goals",
+          "valdrin_goal_types"
+        ]
+      },
+      {
+        "type": "tactical_pressure_shift",
+        "statement": "Second-half chance quality rose sharply after the red card.",
+        "metric_keys": [
+          "kes_xg_h2"
+        ]
+      },
+      {
+        "type": "game_state",
+        "statement": "Comeback from a two-goal deficit.",
+        "metric_keys": [
+          "deficit_overturned"
+        ]
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "key": "valdrin_goals",
+      "label": "Valdrin goals",
+      "value": 3,
+      "unit": "count",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "count(Shot outcome=Goal, player=91011)"
+      }
+    },
+    {
+      "key": "valdrin_goal_types",
+      "label": "Goal types",
+      "value": "open play, penalty, header",
+      "unit": "text",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "classify(goal events)"
+      }
+    },
+    {
+      "key": "deficit_overturned",
+      "label": "Deficit overturned",
+      "value": 2,
+      "unit": "count",
+      "scope": "match",
+      "source": {
+        "type": "computed",
+        "calc": "max(IRO lead)"
+      }
+    },
+    {
+      "key": "winner_xg",
+      "label": "Winning shot xG",
+      "value": 0.22,
+      "unit": "xg",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "event_field",
+        "calc": "shot.statsbomb_xg",
+        "event_ids": [
+          "072312b4-6603-4b7a-867f-4c889a4897e5"
+        ]
+      }
+    },
+    {
+      "key": "winner_speed",
+      "label": "Header speed",
+      "value": 73.6,
+      "unit": "km/h",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "event_field",
+        "calc": "shot.x_shot_speed_kmh",
+        "event_ids": [
+          "072312b4-6603-4b7a-867f-4c889a4897e5"
+        ]
+      }
+    },
+    {
+      "key": "kes_xg_h2",
+      "label": "Kestrel xG, 2nd half",
+      "value": 2.76,
+      "unit": "xg",
+      "scope": "period",
+      "entity": "KES",
+      "baseline": 1.1,
+      "delta": 1.66,
+      "source": {
+        "type": "computed",
+        "calc": "sum(shot.statsbomb_xg, period=2, team=KES) vs period 1"
+      }
+    }
+  ],
+  "importance": {
+    "score": 0.98,
+    "tier": "critical",
+    "factors": [
+      {
+        "name": "score_impact",
+        "weight": 0.4,
+        "value": 1.0
+      },
+      {
+        "name": "milestone",
+        "weight": 0.3,
+        "value": 1.0
+      },
+      {
+        "name": "time_pressure",
+        "weight": 0.3,
+        "value": 0.9
+      }
+    ]
+  },
+  "audience_mode": "analyst",
+  "language": "en",
+  "players": [
+    {
+      "player_id": 91011,
+      "name": "Mateo Valdrin",
+      "team": "KES",
+      "role": "actor",
+      "tag_metric_keys": [
+        "winner_xg",
+        "winner_speed"
+      ]
+    }
+  ],
+  "overlay": {
+    "type": "pitch_map",
+    "position": "right",
+    "priority": 9,
+    "payload": {
+      "title": "Hat-trick: Valdrin",
+      "subtitle": "Header from corner, xG 0.22, 73.6 km/h",
+      "accent_team": "KES",
+      "highlight_metric_keys": [
+        "winner_xg",
+        "winner_speed",
+        "kes_xg_h2"
+      ],
+      "coord_space": "pitch_120x80_actor_attacks_x120",
+      "annotations": [
+        {
+          "kind": "arrow",
+          "from": [
+            111.0,
+            38.0
+          ],
+          "to": [
+            120.0,
+            37.1
+          ],
+          "label": "Header"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "produced_by": [
+      "IngestAgent",
+      "StatsAgent",
+      "ExplainAgent",
+      "PersonaAgent",
+      "VerifierAgent"
+    ],
+    "trace": [
+      {
+        "stage": "ingest",
+        "agent": "IngestAgent",
+        "latency_ms": 12
+      },
+      {
+        "stage": "interpret",
+        "agent": "StatsAgent",
+        "latency_ms": 85
+      },
+      {
+        "stage": "explain",
+        "agent": "ExplainAgent",
+        "latency_ms": 640
+      },
+      {
+        "stage": "personalize",
+        "agent": "PersonaAgent",
+        "latency_ms": 210
+      },
+      {
+        "stage": "verify",
+        "agent": "VerifierAgent",
+        "latency_ms": 40
+      }
+    ],
+    "latency_ms": {
+      "event_to_insight": 987
+    },
+    "model": "<fill: Foundry deployment name>",
+    "confidence": 0.94,
+    "degraded": false,
+    "grounding": {
+      "status": "verified",
+      "numbers_checked": 7,
+      "unbacked_numbers": []
+    }
+  }
+}

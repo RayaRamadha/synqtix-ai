@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.1",
+  "insight_id": "f210b6ad01624b56",
+  "match_id": 900001,
+  "synthetic": true,
+  "trigger": {
+    "kind": "var_overturn",
+    "event_ids": [
+      "7c56c112-34c6-55ba-a0e0-6c5fcdf5d787"
+    ],
+    "event_index": 2334,
+    "rule_id": "var.goal_disallowed"
+  },
+  "timing": {
+    "period": 2,
+    "minute": 66,
+    "second": 29,
+    "display_clock": "66'",
+    "stream_offset_s": 4087.0,
+    "show_at_stream_offset_s": 4089.0,
+    "ttl_ms": 9000
+  },
+  "headline": "VAR rules out Valcourt's goal for offside (0.5 m) (66')",
+  "why_it_matters": "Kestrel's goal was ruled out after a 96-second VAR check: the scorer was 0.5 m offside when the pass was played. The score stays 1-2.",
+  "explanation": {
+    "factors": [
+      {
+        "type": "var_review",
+        "statement": "Kestrel's goal was ruled out after a 96-second VAR check: the scorer was 0.5 m offside when the pass was played. The score stays 1-2.",
+        "metric_keys": [
+          "offside_margin_m",
+          "var_review_s",
+          "score_now"
+        ]
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "key": "shot_xg",
+      "label": "Disallowed shot xG",
+      "value": 0.41,
+      "unit": "xg",
+      "scope": "player",
+      "source": {
+        "type": "event_field",
+        "calc": "shot.statsbomb_xg",
+        "event_ids": [
+          "6290e1bd-4046-54cd-bf62-2f776e6b8cbf"
+        ]
+      },
+      "entity": "91012"
+    },
+    {
+      "key": "offside_margin_m",
+      "label": "Offside margin when the pass was played",
+      "value": 0.5,
+      "unit": "m",
+      "scope": "player",
+      "source": {
+        "type": "event_field",
+        "calc": "var.x_offside_margin_m",
+        "event_ids": [
+          "7c56c112-34c6-55ba-a0e0-6c5fcdf5d787"
+        ]
+      },
+      "entity": "91012"
+    },
+    {
+      "key": "var_review_s",
+      "label": "VAR review length",
+      "value": 96,
+      "unit": "s",
+      "scope": "match",
+      "source": {
+        "type": "event_field",
+        "calc": "var.duration_s",
+        "event_ids": [
+          "7c56c112-34c6-55ba-a0e0-6c5fcdf5d787"
+        ]
+      }
+    },
+    {
+      "key": "score_now",
+      "label": "Score (unchanged)",
+      "value": "1-2",
+      "unit": "text",
+      "scope": "match",
+      "source": {
+        "type": "computed",
+        "calc": "running score"
+      }
+    }
+  ],
+  "importance": {
+    "score": 0.73,
+    "tier": "high",
+    "factors": [
+      {
+        "name": "impact",
+        "weight": 0.5,
+        "value": 0.8
+      },
+      {
+        "name": "chance_quality",
+        "weight": 0.2,
+        "value": 0.5
+      },
+      {
+        "name": "time_pressure",
+        "weight": 0.3,
+        "value": 0.76
+      }
+    ]
+  },
+  "audience_mode": "analyst",
+  "language": "en",
+  "players": [
+    {
+      "player_id": 91012,
+      "name": "Dmitri Valcourt",
+      "team": "KES",
+      "role": "actor",
+      "tag_metric_keys": [
+        "shot_xg"
+      ]
+    }
+  ],
+  "overlay": {
+    "type": "top_banner",
+    "position": "top",
+    "priority": 8,
+    "payload": {
+      "title": "VAR rules out Valcourt's goal for offside (0.5 m) (66')",
+      "subtitle": "Kestrel's goal was ruled out after a 96-second VAR check: the scorer was 0.5 m offside when the pass was played. The sco",
+      "accent_team": "KES",
+      "highlight_metric_keys": [
+        "shot_xg",
+        "offside_margin_m"
+      ]
+    }
+  },
+  "provenance": {
+    "produced_by": [
+      "IngestAgent",
+      "InterpretAgent",
+      "ExplainTemplate",
+      "PersonaTemplate",
+      "VerifierAgent"
+    ],
+    "trace": [
+      {
+        "stage": "interpret",
+        "agent": "InterpretAgent",
+        "latency_ms": 0.16
+      },
+      {
+        "stage": "personalize",
+        "agent": "PersonaTemplate",
+        "latency_ms": 0.04
+      },
+      {
+        "stage": "verify",
+        "agent": "VerifierAgent",
+        "latency_ms": 0.03
+      }
+    ],
+    "latency_ms": {
+      "event_to_insight": 0.23
+    },
+    "model": "deterministic-templates-v0",
+    "confidence": 0.9,
+    "degraded": false,
+    "grounding": {
+      "status": "verified",
+      "numbers_checked": 5,
+      "unbacked_numbers": []
+    }
+  }
+}

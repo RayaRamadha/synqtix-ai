@@ -1,0 +1,147 @@
+{
+  "summary": {
+    "events_in_stream": 3655,
+    "counters": {
+      "invalid": 147,
+      "duplicate": 309,
+      "late": 0,
+      "ok": 3199
+    },
+    "insights": 10,
+    "key_moments_detected": "8/8",
+    "extra_candidates": 2,
+    "grounded": "10/10",
+    "unbacked_numbers_total": 0,
+    "schema_invalid": 0,
+    "latency_ms_p50": 0.15,
+    "latency_ms_p95": 0.61
+  },
+  "rows": [
+    {
+      "key": "counter1",
+      "minute": 12,
+      "detected": true,
+      "headline": "Oquendo opens the scoring: 0-1 (12')",
+      "why": "Kestrel had 68.7% of passes in the last 10 minutes but were caught on the counter.",
+      "names_player": true,
+      "score_ok": true,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.61,
+      "tier": "low"
+    },
+    {
+      "key": "post",
+      "minute": 25,
+      "detected": true,
+      "headline": "Big chance: Valdrin hits the post (0.38 xG) (25')",
+      "why": "A 0.38 xG chance; Kestrel have 0.38 xG so far.",
+      "names_player": true,
+      "score_ok": null,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.15,
+      "tier": "low"
+    },
+    {
+      "key": "counter2",
+      "minute": 38,
+      "detected": true,
+      "headline": "Kriek extends the lead: 0-2 (38')",
+      "why": "Ironvale now lead by 2. Ironvale have scored 2 from 6 shots (0.66 xG): clinical.",
+      "names_player": true,
+      "score_ok": true,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.12,
+      "tier": "medium"
+    },
+    {
+      "key": "red",
+      "minute": 55,
+      "detected": true,
+      "headline": "Red card: Dostal sent off, Ironvale down to 10 (55')",
+      "why": "Ironvale are down to 10 men while leading (0-2). Kestrel already held 63.0% of passes in the last 10 minutes.",
+      "names_player": true,
+      "score_ok": null,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.14,
+      "tier": "high"
+    },
+    {
+      "key": "goal61",
+      "minute": 61,
+      "detected": true,
+      "headline": "Valdrin pulls one back: 1-2 (61')",
+      "why": "6 minutes after the red card, Kestrel's pass share rose to 73.8% (from 63.0%), with 0.44 xG created since. Kestrel cut the deficit to 1.",
+      "names_player": true,
+      "score_ok": true,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.17,
+      "tier": "high"
+    },
+    {
+      "key": "penalty",
+      "minute": 74,
+      "detected": true,
+      "headline": "Valdrin converts the penalty: 2-2 (74')",
+      "why": "19 minutes after the red card, Kestrel's pass share rose to 70.1% (from 63.0%), with 1.73 xG created since. Kestrel are level again after trailing by 2.",
+      "names_player": true,
+      "score_ok": true,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.16,
+      "tier": "critical"
+    },
+    {
+      "key": "breakaway",
+      "minute": 83,
+      "detected": true,
+      "headline": "Rovik denies Oquendo (0.38 xG chance) (83')",
+      "why": "A goal here would have put Ironvale ahead (2-3); the score is 2-2.",
+      "names_player": true,
+      "score_ok": null,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.09,
+      "tier": "high"
+    },
+    {
+      "key": "winner",
+      "minute": 93,
+      "detected": true,
+      "headline": "Valdrin completes the hat-trick: 3-2 (90+3')",
+      "why": "37 minutes after the red card, Kestrel's pass share rose to 69.6% (from 63.0%), with 2.15 xG created since. Valdrin now has 3 goals, scored three different ways: open play, penalty, header. Comeback complete: Kestrel trailed by 2 at one point and now lead.",
+      "names_player": true,
+      "score_ok": true,
+      "grounded": true,
+      "unbacked": [],
+      "latency_ms": 0.22,
+      "tier": "high"
+    }
+  ],
+  "extras": [
+    {
+      "minute": "32'",
+      "headline": "VAR overturns the penalty: contact 1.0 m outside the area (32')"
+    },
+    {
+      "minute": "66'",
+      "headline": "VAR rules out Valcourt's goal for offside (0.5 m) (66')"
+    }
+  ],
+  "insight_ids": [
+    "0c81b99d08259219",
+    "1711a26d62040bfc",
+    "20b99c06b3cd0950",
+    "31de41b54c162a4c",
+    "4aa04d77902f5d7c",
+    "5990db784c7604ec",
+    "886cee0b456fef1c",
+    "8a7112dbd62e46f1",
+    "95540be5633109a9",
+    "f210b6ad01624b56"
+  ]
+}

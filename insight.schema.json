@@ -1,0 +1,681 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/insight-v1.schema.json",
+  "title": "MatchInsight v1",
+  "description": "One explainable, timestamped insight emitted by the pipeline for the overlay. Fully synthetic data only. v1.1 (additive): trigger.kind 'var_overturn', factor types 'var_review' and 'offside_pattern'; 1.0 documents remain valid.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "insight_id",
+    "match_id",
+    "synthetic",
+    "trigger",
+    "timing",
+    "headline",
+    "why_it_matters",
+    "explanation",
+    "metrics",
+    "importance",
+    "audience_mode",
+    "language",
+    "overlay",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x_": {}
+  },
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "insight_id": {
+      "type": "string",
+      "description": "Deterministic: hash(match_id, trigger.event_ids, rule_id, audience_mode, language). Same input => same id (dedup/idempotency).",
+      "minLength": 8
+    },
+    "match_id": {
+      "type": "integer"
+    },
+    "synthetic": {
+      "const": true,
+      "description": "Guard: must always be true (hackathon rule: synthetic data only)."
+    },
+    "trigger": {
+      "type": "object",
+      "required": [
+        "kind",
+        "event_ids",
+        "rule_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "goal",
+            "big_chance",
+            "big_save",
+            "red_card",
+            "var_overturn",
+            "momentum_shift",
+            "pressure_shift",
+            "tempo_change",
+            "pattern",
+            "milestone",
+            "substitution",
+            "tactical_shift"
+          ]
+        },
+        "event_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "UUIDs from the event stream; match answer_key_moments.event_ids."
+        },
+        "event_index": {
+          "type": "integer",
+          "description": "The 'index' field of the primary event (1-based; = list position + 1)."
+        },
+        "rule_id": {
+          "type": "string",
+          "description": "Detector rule / agent skill that fired."
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "required": [
+        "period",
+        "minute",
+        "second",
+        "display_clock",
+        "stream_offset_s",
+        "show_at_stream_offset_s",
+        "ttl_ms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "period": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "minute": {
+          "type": "integer",
+          "description": "Cumulative minute, copied from the event."
+        },
+        "second": {
+          "type": "integer"
+        },
+        "display_clock": {
+          "type": "string",
+          "examples": [
+            "12'",
+            "45+1'",
+            "90+3'"
+          ]
+        },
+        "stream_offset_s": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Monotonic seconds since kickoff = (period 1 end offset if period>1) + event timestamp. Needed because per-period timestamps reset."
+        },
+        "show_at_stream_offset_s": {
+          "type": "number",
+          "minimum": 0,
+          "description": "When the overlay should appear (>= stream_offset_s; usually +1..3s so it lands after the action)."
+        },
+        "ttl_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 30000
+        }
+      }
+    },
+    "headline": {
+      "type": "string",
+      "maxLength": 90
+    },
+    "why_it_matters": {
+      "type": "string",
+      "maxLength": 320,
+      "description": "Explains significance (control vs chaos, pressure shift, rhythm), not just what happened. Every number must appear in metrics[]."
+    },
+    "explanation": {
+      "type": "object",
+      "required": [
+        "factors"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "factors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "statement",
+              "metric_keys"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "enum": [
+                  "control_vs_chaos",
+                  "tactical_pressure_shift",
+                  "tempo_rhythm",
+                  "game_state",
+                  "finishing_efficiency",
+                  "milestone",
+                  "transition_vulnerability",
+                  "var_review",
+                  "offside_pattern"
+                ]
+              },
+              "statement": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "metric_keys": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                },
+                "description": "Evidence: keys that exist in metrics[]."
+              }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "label",
+          "value",
+          "unit",
+          "scope",
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "string"
+            ]
+          },
+          "unit": {
+            "enum": [
+              "count",
+              "pct",
+              "xg",
+              "km/h",
+              "m",
+              "s",
+              "ratio",
+              "score",
+              "text"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "match",
+              "period",
+              "window",
+              "player",
+              "team"
+            ]
+          },
+          "entity": {
+            "type": "string",
+            "description": "Team code (KES/IRO) or player id as string."
+          },
+          "window": {
+            "type": "object",
+            "properties": {
+              "from_stream_s": {
+                "type": "number"
+              },
+              "to_stream_s": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "from_stream_s",
+              "to_stream_s"
+            ],
+            "additionalProperties": false
+          },
+          "baseline": {
+            "type": [
+              "number",
+              "string"
+            ]
+          },
+          "delta": {
+            "type": "number"
+          },
+          "source": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "enum": [
+                  "event_field",
+                  "computed"
+                ]
+              },
+              "calc": {
+                "type": "string"
+              },
+              "event_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "importance": {
+      "type": "object",
+      "required": [
+        "score",
+        "tier"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "tier": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "factors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "weight",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "value": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "audience_mode": {
+      "enum": [
+        "analyst",
+        "casual_fan",
+        "broadcaster"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Z]{2})?$",
+      "description": "BCP-47, e.g. en, id, es."
+    },
+    "translations": {
+      "type": "object",
+      "description": "Optional pre-rendered variants: lang -> {headline, why_it_matters}.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "headline",
+          "why_it_matters"
+        ],
+        "properties": {
+          "headline": {
+            "type": "string"
+          },
+          "why_it_matters": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "personalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "favorite_team": {
+          "enum": [
+            "KES",
+            "IRO"
+          ]
+        },
+        "favorite_player_id": {
+          "type": "integer"
+        },
+        "focus_metric": {
+          "type": "string",
+          "description": "A metrics[].key to emphasise."
+        },
+        "player_focus": {
+          "type": "boolean"
+        },
+        "relevance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "players": {
+      "type": "array",
+      "description": "Real-time name tags.",
+      "items": {
+        "type": "object",
+        "required": [
+          "player_id",
+          "name",
+          "team"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "player_id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "team": {
+            "enum": [
+              "KES",
+              "IRO"
+            ]
+          },
+          "role": {
+            "enum": [
+              "actor",
+              "assist",
+              "victim",
+              "keeper",
+              "focus"
+            ]
+          },
+          "tag_metric_keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "overlay": {
+      "type": "object",
+      "required": [
+        "type",
+        "position",
+        "priority",
+        "payload"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "lower_third",
+            "top_banner",
+            "stat_card",
+            "pitch_map",
+            "player_tag",
+            "ticker"
+          ]
+        },
+        "position": {
+          "enum": [
+            "bottom",
+            "top",
+            "left",
+            "right",
+            "center"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Higher wins when overlays collide."
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "maxLength": 60
+            },
+            "subtitle": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "accent_team": {
+              "enum": [
+                "KES",
+                "IRO"
+              ]
+            },
+            "highlight_metric_keys": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 3
+            },
+            "coord_space": {
+              "const": "pitch_120x80_actor_attacks_x120"
+            },
+            "annotations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "point",
+                      "arrow",
+                      "zone"
+                    ]
+                  },
+                  "from": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "to": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "produced_by",
+        "confidence",
+        "degraded",
+        "grounding"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "produced_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Agents involved, in order."
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "stage",
+              "agent",
+              "latency_ms"
+            ],
+            "properties": {
+              "stage": {
+                "enum": [
+                  "ingest",
+                  "interpret",
+                  "explain",
+                  "render",
+                  "personalize",
+                  "verify"
+                ]
+              },
+              "agent": {
+                "type": "string"
+              },
+              "latency_ms": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "latency_ms": {
+          "type": "object",
+          "properties": {
+            "event_to_insight": {
+              "type": "number"
+            }
+          }
+        },
+        "model": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "degraded": {
+          "type": "boolean",
+          "description": "True if an agent failed and the insight was produced by a fallback (e.g. template/no explanation LLM)."
+        },
+        "degraded_reason": {
+          "type": "string"
+        },
+        "grounding": {
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "verified",
+                "unverified",
+                "failed"
+              ]
+            },
+            "numbers_checked": {
+              "type": "integer"
+            },
+            "unbacked_numbers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "provenance": {
+        "properties": {
+          "degraded": {
+            "const": true
+          }
+        }
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "provenance": {
+        "required": [
+          "degraded_reason"
+        ]
+      }
+    }
+  }
+}

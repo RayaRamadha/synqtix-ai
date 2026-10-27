@@ -1,0 +1,425 @@
+{
+  "synthetic": true,
+  "note": "Fully synthetic data. Clubs, players and results are fictional; any resemblance to real people is coincidental.",
+  "match_id": 900001,
+  "seed": 2026,
+  "generator": "sim/generate.py (decision model + match simulator)",
+  "teams": {
+    "KES": {
+      "id": 9001,
+      "name": "Kestrel Rovers",
+      "formation": 4231
+    },
+    "IRO": {
+      "id": 9002,
+      "name": "Ironvale Athletic",
+      "formation": 442
+    }
+  },
+  "final_score": {
+    "Kestrel Rovers": 3,
+    "Ironvale Athletic": 2
+  },
+  "scenario": "Comeback: dominant-but-toothless Kestrel go 0-2 down to counters, Ironvale lose a defender to a red card (55'), Valdrin hat-trick wins it 3-2 in injury time.",
+  "stats": {
+    "KES": {
+      "name": "Kestrel Rovers",
+      "goals": 3,
+      "shots": 20,
+      "xg": 3.01,
+      "passes": 622,
+      "pass_accuracy_pct": 89.1,
+      "xg_h1": 0.69,
+      "xg_h2": 2.33,
+      "possession_h1_pct": 57.4,
+      "possession_h2_pct": 65.1
+    },
+    "IRO": {
+      "name": "Ironvale Athletic",
+      "goals": 2,
+      "shots": 8,
+      "xg": 1.05,
+      "passes": 334,
+      "pass_accuracy_pct": 71.6,
+      "xg_h1": 0.67,
+      "xg_h2": 0.38,
+      "possession_h1_pct": 42.6,
+      "possession_h2_pct": 34.9
+    }
+  },
+  "answer_key_moments": [
+    {
+      "key": "counter1",
+      "match_minute": 12,
+      "headline": "Ironvale counter-attack goal: 0-1",
+      "why_it_matters": "Kestrel had the ball but lost it; Ironvale scored on a counter (0 passes, ~6 seconds from the first touch of the move).",
+      "event_ids": [
+        "56876779-edd6-568c-834c-ef895c2d2241"
+      ],
+      "event_index": 483,
+      "kind": "goal",
+      "player": "Dario Oquendo",
+      "team": "IRO"
+    },
+    {
+      "key": "post",
+      "match_minute": 25,
+      "headline": "Valdrin hits the post",
+      "why_it_matters": "Biggest first-half Kestrel chance. Territorial dominance without a goal: control is not the same as danger.",
+      "event_ids": [
+        "c933d258-238d-53ed-a6f6-9d39b5430544"
+      ],
+      "event_index": 1013,
+      "kind": "big_chance",
+      "player": "Mateo Valdrin",
+      "team": "KES"
+    },
+    {
+      "key": "counter2",
+      "match_minute": 38,
+      "headline": "Ironvale second counter goal: 0-2",
+      "why_it_matters": "6 Ironvale shots, 2 goals (xG 0.66) versus Kestrel's high possession. Pattern: clinical on transitions.",
+      "event_ids": [
+        "c7309be9-9705-5495-8e96-4f5388f73685"
+      ],
+      "event_index": 1468,
+      "kind": "goal",
+      "player": "Stellan Kriek",
+      "team": "IRO"
+    },
+    {
+      "key": "red",
+      "match_minute": 55,
+      "headline": "Red card: Dostal sent off (last-man foul on Valdrin)",
+      "why_it_matters": "Ironvale drop to 10 men and switch to 4-4-1. Game state flips: Kestrel pressure and territory should rise sharply.",
+      "event_ids": [
+        "fddb830c-ad62-5ebf-8021-ec5f160d96c2"
+      ],
+      "event_index": 2097,
+      "kind": "red_card",
+      "player": "Marek Dostal",
+      "team": "IRO"
+    },
+    {
+      "key": "goal61",
+      "match_minute": 61,
+      "headline": "Valdrin pulls one back: 1-2",
+      "why_it_matters": "First goal after the red card. Momentum swing begins; Valdrin's 1st of 3.",
+      "event_ids": [
+        "75ea09ff-92e3-5c02-9440-0250282cdb4b"
+      ],
+      "event_index": 2234,
+      "kind": "goal",
+      "player": "Mateo Valdrin",
+      "team": "KES"
+    },
+    {
+      "key": "penalty",
+      "match_minute": 74,
+      "headline": "Valdrin converts the penalty: 2-2",
+      "why_it_matters": "Penalty won by Valdrin himself (VAR-checked), 2nd of his hat-trick. Ironvale's depleted defence is giving away fouls in the box.",
+      "event_ids": [
+        "f1fb646b-61e8-5167-abdc-3345cfab9115"
+      ],
+      "event_index": 2497,
+      "kind": "goal",
+      "player": "Mateo Valdrin",
+      "team": "KES",
+      "foul_event_id": "1f4866ac-64d0-5b3d-8984-c985c7726616"
+    },
+    {
+      "key": "breakaway",
+      "match_minute": 83,
+      "headline": "Rovik saves one-on-one",
+      "why_it_matters": "Ironvale (10 men) break once more; a goal here would have put them 3-2 up. The save keeps Kestrel's comeback alive.",
+      "event_ids": [
+        "a14f1046-4bed-5656-8eaa-6e6657d552c5"
+      ],
+      "event_index": 2789,
+      "kind": "big_save",
+      "player": "Anselm Rovik",
+      "team": "KES"
+    },
+    {
+      "key": "winner",
+      "match_minute": 93,
+      "headline": "Valdrin completes the hat-trick: 3-2 (90+3')",
+      "why_it_matters": "Header from a corner in injury time. Comeback from 0-2, third Valdrin goal: three different goal types (open play, penalty, header).",
+      "event_ids": [
+        "6708d5b4-0e99-5205-84c1-d298e742f67d"
+      ],
+      "event_index": 3195,
+      "kind": "goal",
+      "player": "Mateo Valdrin",
+      "team": "KES",
+      "milestone": "hat-trick"
+    }
+  ],
+  "cards": [
+    {
+      "minute": 8,
+      "team": "KES",
+      "player": "Teo Marchetti",
+      "card": "Yellow Card"
+    },
+    {
+      "minute": 32,
+      "team": "IRO",
+      "player": "Gideon Achterberg",
+      "card": "Yellow Card"
+    },
+    {
+      "minute": 55,
+      "team": "IRO",
+      "player": "Marek Dostal",
+      "card": "Red Card"
+    }
+  ],
+  "substitutions": [
+    {
+      "minute": 45,
+      "team": "KES",
+      "out": "Samir Okonjo",
+      "in": "Dmitri Valcourt"
+    },
+    {
+      "minute": 60,
+      "team": "IRO",
+      "out": "Callum Strathern",
+      "in": "Wesley Nakamura"
+    },
+    {
+      "minute": 70,
+      "team": "KES",
+      "out": "Niko Halvarsen",
+      "in": "Bram Eskelinen"
+    },
+    {
+      "minute": 76,
+      "team": "IRO",
+      "out": "Leandro Ferrez",
+      "in": "Noel Abernathy"
+    }
+  ],
+  "var_reviews": [
+    {
+      "minute": 12,
+      "review": "Goal Check",
+      "outcome": "Goal Confirmed",
+      "team": "IRO",
+      "event_id": "0c6c022d-2ab6-560e-ae0c-a23f55a00df1",
+      "subject_event_id": "56876779-edd6-568c-834c-ef895c2d2241"
+    },
+    {
+      "minute": 32,
+      "review": "Penalty Review",
+      "outcome": "Penalty Overturned",
+      "team": "KES",
+      "event_id": "5bb9a7e9-6568-5167-a737-e63f4756e7fd",
+      "subject_event_id": "d11f1199-19bf-5df1-9592-ac3a8ffad9de"
+    },
+    {
+      "minute": 38,
+      "review": "Goal Check",
+      "outcome": "Goal Confirmed",
+      "team": "IRO",
+      "event_id": "3fa10d57-68f9-5802-8956-724d1d38bbc7",
+      "subject_event_id": "c7309be9-9705-5495-8e96-4f5388f73685"
+    },
+    {
+      "minute": 55,
+      "review": "Red Card Review",
+      "outcome": "Red Card Upheld",
+      "team": "IRO",
+      "event_id": "06e6495f-8bc2-5c69-99a7-2403bceb085c",
+      "subject_event_id": "fddb830c-ad62-5ebf-8021-ec5f160d96c2"
+    },
+    {
+      "minute": 61,
+      "review": "Goal Check",
+      "outcome": "Goal Confirmed",
+      "team": "KES",
+      "event_id": "2ce2ec3e-031d-55ed-a0ee-04c3660b9688",
+      "subject_event_id": "75ea09ff-92e3-5c02-9440-0250282cdb4b"
+    },
+    {
+      "minute": 66,
+      "review": "Goal Check",
+      "outcome": "Goal Disallowed",
+      "team": "KES",
+      "event_id": "7c56c112-34c6-55ba-a0e0-6c5fcdf5d787",
+      "subject_event_id": "6290e1bd-4046-54cd-bf62-2f776e6b8cbf"
+    },
+    {
+      "minute": 73,
+      "review": "Penalty Review",
+      "outcome": "Penalty Confirmed",
+      "team": "KES",
+      "event_id": "323ba6cb-6207-58d0-b032-788a641ae16e",
+      "subject_event_id": "1f4866ac-64d0-5b3d-8984-c985c7726616"
+    },
+    {
+      "minute": 74,
+      "review": "Goal Check",
+      "outcome": "Goal Confirmed",
+      "team": "KES",
+      "event_id": "431dde7b-b6be-53ae-8123-4629c5ca6ec1",
+      "subject_event_id": "f1fb646b-61e8-5167-abdc-3345cfab9115"
+    },
+    {
+      "minute": 93,
+      "review": "Goal Check",
+      "outcome": "Goal Confirmed",
+      "team": "KES",
+      "event_id": "7ef6f053-26d0-5a89-a09b-85188d1a3217",
+      "subject_event_id": "6708d5b4-0e99-5205-84c1-d298e742f67d"
+    }
+  ],
+  "simulation": {
+    "method": "Seeded utility-based decision model (shoot / pass / carry / dribble / clear / hold) + 2 Hz movement simulator; scripted beats fix WHEN the answer-key moments happen, not how the play around them looks.",
+    "scripted_beats": [
+      {
+        "key": "counter1",
+        "kind": "counter",
+        "period": 1,
+        "team": "IRO",
+        "window_s": [
+          720,
+          780
+        ]
+      },
+      {
+        "key": "foul33",
+        "kind": "box_edge_foul",
+        "period": 1,
+        "team": "KES",
+        "window_s": [
+          1950,
+          2040
+        ]
+      },
+      {
+        "key": "post",
+        "kind": "chance",
+        "period": 1,
+        "team": "KES",
+        "window_s": [
+          1500,
+          1560
+        ]
+      },
+      {
+        "key": "counter2",
+        "kind": "counter",
+        "period": 1,
+        "team": "IRO",
+        "window_s": [
+          2280,
+          2340
+        ]
+      },
+      {
+        "key": "red",
+        "kind": "foul_red",
+        "period": 2,
+        "team": "KES",
+        "window_s": [
+          600,
+          660
+        ]
+      },
+      {
+        "key": "goal61",
+        "kind": "chance",
+        "period": 2,
+        "team": "KES",
+        "window_s": [
+          960,
+          1020
+        ]
+      },
+      {
+        "key": "disallowed",
+        "kind": "disallowed",
+        "period": 2,
+        "team": "KES",
+        "window_s": [
+          1260,
+          1320
+        ]
+      },
+      {
+        "key": "penalty",
+        "kind": "foul_pen",
+        "period": 2,
+        "team": "KES",
+        "window_s": [
+          1700,
+          1800
+        ]
+      },
+      {
+        "key": "breakaway",
+        "kind": "chance",
+        "period": 2,
+        "team": "IRO",
+        "window_s": [
+          2280,
+          2340
+        ]
+      },
+      {
+        "key": "winner",
+        "kind": "corner_goal",
+        "period": 2,
+        "team": "KES",
+        "window_s": [
+          2880,
+          2940
+        ]
+      }
+    ],
+    "unscripted_shots_never_score": true,
+    "possession_basis": "share of simulated ball-control time (tracking frames)",
+    "acceptance": {
+      "central_close_situations": 3,
+      "central_close_shot_rate": 1.0,
+      "passes_le12m_central": 0,
+      "passes_in_box": 12,
+      "shots_in_box": 23,
+      "shots_total": 28,
+      "shots_Kestrel": 20,
+      "xg_Kestrel": 3.01,
+      "shots_Ironvale": 8,
+      "xg_Ironvale": 1.05,
+      "completed_passes_to_offside_receivers": 0,
+      "offside_events": 5,
+      "pass_offside_outcomes": 4,
+      "goals": 5,
+      "goals_with_var": 5,
+      "reds": 1,
+      "reds_with_var": 1,
+      "var_events": 9,
+      "var_overturned": [
+        "Penalty Overturned",
+        "Goal Disallowed"
+      ],
+      "yellow_cards": 2,
+      "passes": 956,
+      "events": 3199
+    }
+  },
+  "x_extensions": {
+    "pass.x_difficulty": "0-1 pass difficulty rating (1 - modelled completion probability)",
+    "pass.x_ball_speed_kmh": "ball speed in km/h",
+    "shot.x_shot_speed_kmh": "shot speed in km/h",
+    "carry.x_speed_kmh": "player speed while carrying the ball, km/h",
+    "pressure.x_pressure_level": "0-1 pressure intensity",
+    "pass.x_offside_check": "{receiver_margin_m, offside_line_x, receiver_offside}: receiver vs the offside line at the moment the pass was played (attacking frame, + = offside)",
+    "Offside": "type Offside: offside player, x_margin_m, x_var_candidate (|margin|<0.5 m), x_overturned_by_var; pass outcome 'Pass Offside' + 'Free Kick Awarded' follow",
+    "Free Kick Awarded": "type Free Kick Awarded: team awarded, reason (Offside/Foul/...)",
+    "VAR": "type VAR: var.review, var.outcome, var.checks[], var.duration_s, var.subject_event_id, x_offside_margin_m, x_freeze_frame; shot outcome 'Goal Disallowed' = ball in the net, ruled out by VAR",
+    "tracking": "data/tracking_900001.json: SIMULATED 2 Hz positions of all 22 players + ball"
+  },
+  "event_count": 3199
+}

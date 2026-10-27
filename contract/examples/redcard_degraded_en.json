@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "match_id": 900001,
+  "synthetic": true,
+  "insight_id": "red-55-analyst-en-0004-degraded",
+  "trigger": {
+    "kind": "red_card",
+    "event_ids": [
+      "c0efad6b-59c9-44a9-a8f3-09e1be8df893"
+    ],
+    "event_index": 2436,
+    "rule_id": "discipline.red_card"
+  },
+  "timing": {
+    "period": 2,
+    "minute": 55,
+    "second": 24,
+    "display_clock": "55'",
+    "stream_offset_s": 3401.021,
+    "show_at_stream_offset_s": 3403.021,
+    "ttl_ms": 8000
+  },
+  "headline": "Red card: Dostal sent off, Ironvale down to 10",
+  "why_it_matters": "Ironvale are down to 10 men while leading 2-0. Game state flips: expect Kestrel to push higher.",
+  "explanation": {
+    "factors": [
+      {
+        "type": "game_state",
+        "statement": "Numerical disadvantage for Ironvale from minute 55.",
+        "metric_keys": [
+          "iro_players_on_pitch",
+          "score_state"
+        ]
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "key": "iro_players_on_pitch",
+      "label": "Ironvale players",
+      "value": 10,
+      "unit": "count",
+      "scope": "team",
+      "entity": "IRO",
+      "source": {
+        "type": "computed",
+        "calc": "11 - red cards",
+        "event_ids": [
+          "c0efad6b-59c9-44a9-a8f3-09e1be8df893"
+        ]
+      }
+    },
+    {
+      "key": "score_state",
+      "label": "Score at red card",
+      "value": "0-2",
+      "unit": "text",
+      "scope": "match",
+      "source": {
+        "type": "computed",
+        "calc": "running score at event"
+      }
+    }
+  ],
+  "importance": {
+    "score": 0.85,
+    "tier": "high"
+  },
+  "audience_mode": "analyst",
+  "language": "en",
+  "overlay": {
+    "type": "top_banner",
+    "position": "top",
+    "priority": 8,
+    "payload": {
+      "title": "RED CARD: Dostal",
+      "subtitle": "Ironvale down to 10",
+      "accent_team": "IRO"
+    }
+  },
+  "provenance": {
+    "produced_by": [
+      "IngestAgent",
+      "StatsAgent",
+      "TemplateFallback"
+    ],
+    "confidence": 0.6,
+    "degraded": true,
+    "degraded_reason": "ExplainAgent timeout; fallback template used, no pressure-shift analysis",
+    "grounding": {
+      "status": "verified",
+      "numbers_checked": 3,
+      "unbacked_numbers": []
+    }
+  }
+}

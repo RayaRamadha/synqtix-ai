@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.0",
+  "match_id": 900001,
+  "synthetic": true,
+  "insight_id": "h3-90p3-playerfocus-en-0003",
+  "trigger": {
+    "kind": "goal",
+    "event_ids": [
+      "072312b4-6603-4b7a-867f-4c889a4897e5"
+    ],
+    "event_index": 3734,
+    "rule_id": "goal.milestone.hat_trick"
+  },
+  "timing": {
+    "period": 2,
+    "minute": 93,
+    "second": 16,
+    "display_clock": "90+3'",
+    "stream_offset_s": 5672.51,
+    "show_at_stream_offset_s": 5674.51,
+    "ttl_ms": 9000
+  },
+  "headline": "Your man Valdrin: 3 goals from 5 shots, all in different ways",
+  "why_it_matters": "His 5 shots carried 1.97 xG in total, and the three that went in were worth 1.29. The winner came from only 0.22 xG, a hard header at 73.6 km/h.",
+  "explanation": {
+    "factors": [
+      {
+        "type": "milestone",
+        "statement": "Hat-trick with three different goal types.",
+        "metric_keys": [
+          "valdrin_goals",
+          "valdrin_goal_types"
+        ]
+      },
+      {
+        "type": "tactical_pressure_shift",
+        "statement": "Second-half chance quality rose sharply after the red card.",
+        "metric_keys": [
+          "kes_xg_h2"
+        ]
+      },
+      {
+        "type": "game_state",
+        "statement": "Comeback from a two-goal deficit.",
+        "metric_keys": [
+          "deficit_overturned"
+        ]
+      },
+      {
+        "type": "finishing_efficiency",
+        "statement": "Goals came from low-to-medium chances.",
+        "metric_keys": [
+          "valdrin_xg_all",
+          "valdrin_xg_goals",
+          "winner_xg"
+        ]
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "key": "valdrin_goals",
+      "label": "Valdrin goals",
+      "value": 3,
+      "unit": "count",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "count(Shot outcome=Goal, player=91011)"
+      }
+    },
+    {
+      "key": "valdrin_goal_types",
+      "label": "Goal types",
+      "value": "open play, penalty, header",
+      "unit": "text",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "classify(goal events)"
+      }
+    },
+    {
+      "key": "deficit_overturned",
+      "label": "Deficit overturned",
+      "value": 2,
+      "unit": "count",
+      "scope": "match",
+      "source": {
+        "type": "computed",
+        "calc": "max(IRO lead)"
+      }
+    },
+    {
+      "key": "winner_xg",
+      "label": "Winning shot xG",
+      "value": 0.22,
+      "unit": "xg",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "event_field",
+        "calc": "shot.statsbomb_xg",
+        "event_ids": [
+          "072312b4-6603-4b7a-867f-4c889a4897e5"
+        ]
+      }
+    },
+    {
+      "key": "winner_speed",
+      "label": "Header speed",
+      "value": 73.6,
+      "unit": "km/h",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "event_field",
+        "calc": "shot.x_shot_speed_kmh",
+        "event_ids": [
+          "072312b4-6603-4b7a-867f-4c889a4897e5"
+        ]
+      }
+    },
+    {
+      "key": "kes_xg_h2",
+      "label": "Kestrel xG, 2nd half",
+      "value": 2.76,
+      "unit": "xg",
+      "scope": "period",
+      "entity": "KES",
+      "baseline": 1.1,
+      "delta": 1.66,
+      "source": {
+        "type": "computed",
+        "calc": "sum(shot.statsbomb_xg, period=2, team=KES) vs period 1"
+      }
+    },
+    {
+      "key": "valdrin_shots",
+      "label": "Valdrin shots",
+      "value": 5,
+      "unit": "count",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "count(Shot, player=91011)"
+      }
+    },
+    {
+      "key": "valdrin_xg_all",
+      "label": "Valdrin total xG",
+      "value": 1.97,
+      "unit": "xg",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "sum(shot.statsbomb_xg, player=91011)"
+      }
+    },
+    {
+      "key": "valdrin_xg_goals",
+      "label": "xG of goals scored",
+      "value": 1.29,
+      "unit": "xg",
+      "scope": "player",
+      "entity": "91011",
+      "source": {
+        "type": "computed",
+        "calc": "sum(shot.statsbomb_xg, goals only)"
+      }
+    }
+  ],
+  "importance": {
+    "score": 0.98,
+    "tier": "critical",
+    "factors": [
+      {
+        "name": "score_impact",
+        "weight": 0.4,
+        "value": 1.0
+      },
+      {
+        "name": "milestone",
+        "weight": 0.3,
+        "value": 1.0
+      },
+      {
+        "name": "time_pressure",
+        "weight": 0.3,
+        "value": 0.9
+      }
+    ]
+  },
+  "audience_mode": "casual_fan",
+  "language": "en",
+  "players": [
+    {
+      "player_id": 91011,
+      "name": "Mateo Valdrin",
+      "team": "KES",
+      "role": "actor",
+      "tag_metric_keys": [
+        "winner_xg",
+        "winner_speed"
+      ]
+    }
+  ],
+  "overlay": {
+    "type": "player_tag",
+    "position": "left",
+    "priority": 8,
+    "payload": {
+      "title": "Valdrin",
+      "subtitle": "3 goals, 5 shots",
+      "accent_team": "KES",
+      "highlight_metric_keys": [
+        "valdrin_goals",
+        "winner_xg",
+        "winner_speed"
+      ]
+    }
+  },
+  "provenance": {
+    "produced_by": [
+      "IngestAgent",
+      "StatsAgent",
+      "ExplainAgent",
+      "PersonaAgent",
+      "VerifierAgent"
+    ],
+    "trace": [
+      {
+        "stage": "ingest",
+        "agent": "IngestAgent",
+        "latency_ms": 12
+      },
+      {
+        "stage": "interpret",
+        "agent": "StatsAgent",
+        "latency_ms": 85
+      },
+      {
+        "stage": "explain",
+        "agent": "ExplainAgent",
+        "latency_ms": 640
+      },
+      {
+        "stage": "personalize",
+        "agent": "PersonaAgent",
+        "latency_ms": 210
+      },
+      {
+        "stage": "verify",
+        "agent": "VerifierAgent",
+        "latency_ms": 40
+      }
+    ],
+    "latency_ms": {
+      "event_to_insight": 987
+    },
+    "model": "<fill: Foundry deployment name>",
+    "confidence": 0.94,
+    "degraded": false,
+    "grounding": {
+      "status": "verified",
+      "numbers_checked": 7,
+      "unbacked_numbers": []
+    }
+  },
+  "personalization": {
+    "favorite_team": "KES",
+    "favorite_player_id": 91011,
+    "player_focus": true,
+    "focus_metric": "valdrin_xg_all",
+    "relevance": 1.0
+  }
+}
